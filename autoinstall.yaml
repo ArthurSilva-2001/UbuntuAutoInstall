@@ -1,0 +1,84 @@
+#cloud-config
+autoinstall:
+    version: 1
+    identity:
+        realname: 'Arthur Silva'
+        hostname: Ubuntu
+        username: arthursilva
+        password: '$6$1KI8YaC79Ywzvlkx$HkxCIzs7NuN/XGX.rowpxHjUlN9HrkijtVeZW./Yblrh82A1PG1q7Hn/QwrVtRaImGxwuJTofu32U93GEIwg80'
+    locale: pt_BR.utf8
+    keyboard:
+        layout: br
+    timezone: "America/Maceio"   
+    packages:
+        - gcc
+        - g++
+        - gdb
+        - default-jdk
+        - git
+        - nodejs
+        - npm
+        - geany
+        - geany-plugins
+        - gimp
+        - vlc
+        - guvcview
+        - virtualbox
+        - virtualbox-guest-additions-iso
+        - gparted
+        - cpu-x
+        - soundconverter
+        - gufw
+        - handbrake
+        - gnome-boxes
+        - gnome-calendar
+        - ubuntu-restricted-extras
+        - xournalpp
+        - flatpak
+    snaps:
+        - name: code
+          channel: stable
+          classic: true
+        
+        - name: brave
+          channel: stable
+          classic: false
+
+        - name: motrix
+          channel: stable
+          classic: false
+
+        - name: bitwarden
+          channel: stable
+          classic: false
+
+        - name: image-optimizer
+          channel: stable
+          classic: false
+
+        - name: pycharm-community
+          channel: stable
+          classic: true
+
+        - name: intellij-idea-community
+          channel: stable
+          classic: true
+
+        - name: firefox
+          channel: stable
+          classic: false
+    codecs:
+        install: true
+    drivers:
+        install: true
+    updates: all
+    late-commands:
+        - curtin in-target -- flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+        - curtin in-target -- flatpak install -y flathub net.ankiweb.Anki
+        - curtin in-target -- flatpak install -y flathub com.github.finefindus.eyedropper
+        - curtin in-target -- flatpak install -y flathub io.github.shiftey.Desktop
+        - curtin in-target -- flatpak install -y flathub org.eclipse.Java
+        - curtin in-target -- flatpak install -y flathub org.gaphor.Gaphor
+        - curtin in-target -- flatpak install -y flathub org.codeblocks.codeblocks
+    shutdown: reboot
+
