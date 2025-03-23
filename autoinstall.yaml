@@ -71,18 +71,6 @@ autoinstall:
     late-commands:
         - curtin in-target -- apt update && apt upgrade -y
 
-        # Adiciona repositório e instala Google Chrome
-        - curtin in-target -- wget -qO- https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome-keyring.gpg
-        - curtin in-target -- echo "deb [signed-by=/usr/share/keyrings/google-chrome-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list
-        - curtin in-target -- apt update
-        - curtin in-target -- apt install -y google-chrome-stable
-
-        # Adiciona repositório e instala AnyDesk
-        - curtin in-target -- wget -qO- https://keys.anydesk.com/repos/DEB-GPG-KEY | gpg --dearmor -o /usr/share/keyrings/anydesk-keyring.gpg
-        - curtin in-target -- echo "deb [signed-by=/usr/share/keyrings/anydesk-keyring.gpg] http://deb.anydesk.com/ all main" | tee /etc/apt/sources.list.d/anydesk.list
-        - curtin in-target -- apt update
-        - curtin in-target -- apt install -y anydesk
-
         # Adiciona repositório e instala Flatpaks
         - curtin in-target -- flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
         - curtin in-target -- flatpak install --assumeyes flathub net.ankiweb.Anki
